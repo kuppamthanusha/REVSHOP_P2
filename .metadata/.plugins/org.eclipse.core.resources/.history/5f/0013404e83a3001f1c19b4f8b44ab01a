@@ -1,0 +1,5 @@
+package com.revshop.userservice.service;
+
+public class MessageProducer {
+
+}

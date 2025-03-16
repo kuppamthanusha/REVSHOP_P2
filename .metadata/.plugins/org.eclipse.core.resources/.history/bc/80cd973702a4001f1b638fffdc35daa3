@@ -1,0 +1,12 @@
+package com.example.client_app.service;
+
+import org.springframework.kafka.annotation.KafkaListener;
+
+@Service
+public class MessageConsumer {
+
+	   @KafkaListener(topics = "my-topic", groupId = "my-group-id")
+	    public void listen(String message) {
+	        System.out.println("Received message: " + message);
+	    }
+}

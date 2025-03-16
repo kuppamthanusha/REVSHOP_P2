@@ -1,0 +1,265 @@
+package com.revshop.order_service.controller;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.revshop.order_service.entity.Cart;
+import com.revshop.order_service.entity.Order;
+import com.revshop.order_service.entity.OrderItem;
+import com.revshop.order_service.entity.OrderResponse;
+import com.revshop.order_service.entity.Product;
+import com.revshop.order_service.entity.UserModel;
+import com.revshop.order_service.repository.UserRepository;
+import com.revshop.order_service.service.OrderService;
+
+public class TestOrderController {
+
+	@InjectMocks
+	private OrderController orderController;
+	
+	@Mock
+	private OrderService orderService;
+	
+	@Mock
+	private UserRepository userRepository;
+	
+	Cart cart1;
+	Cart cart2;
+	UserModel userModel;
+	Product product2;
+	Product product;
+	
+	@BeforeEach
+	public void setup() {
+		MockitoAnnotations.openMocks(this);
+		
+		cart1 = new Cart();
+		cart2 = new Cart();
+		
+		int userId = 1;
+		userModel = new UserModel();
+		userModel.setUserId(userId);
+		
+		int productId = 1;	
+		product = new Product();
+		product.setProductId(productId);
+		
+		int productId2 = 2;
+		product2 = new Product();
+		product.setProductId(productId2);
+		
+		cart1.setUser(userModel);
+		cart1.setProduct(product);
+			
+		cart2.setUser(userModel);
+		cart2.setProduct(product2);
+	}
+	
+	@Test
+	public void testCreateOrder_ReturnsOk() {
+	
+		Order order = new Order();
+		OrderResponse orderRes = new OrderResponse();
+		
+		String billingAddress = "Chennai";
+		String shippingAddress = "Telangana";
+		
+		List<Cart> items = Arrays.asList(cart1, cart2);
+		
+		orderRes.setCart(items);
+		orderRes.setBillingAddress(billingAddress);
+		orderRes.setShippingAddress(shippingAddress);
+		orderRes.setUser(userModel);
+		
+		when(orderService.createOrder(userModel, items, shippingAddress, billingAddress)).thenReturn(order);
+		ResponseEntity<?> res = orderController.createOrder(orderRes);
+		assertEquals(HttpStatus.OK, res.getStatusCode());
+	}
+	
+	@Test
+	public void testCreateOrder_ReturnsBadRequest() {
+		
+		OrderResponse orderRes = new OrderResponse();
+		
+		String billingAddress = "Chennai";
+		String shippingAddress = "Telangana";
+				
+		List<Cart> items = Arrays.asList(cart1, cart2);
+		
+		orderRes.setCart(items);
+		orderRes.setBillingAddress(billingAddress);
+		orderRes.setShippingAddress(shippingAddress);
+		orderRes.setUser(userModel);
+		
+		when(orderService.createOrder(userModel, items, shippingAddress, billingAddress)).thenReturn(null);
+		ResponseEntity<?> res = orderController.createOrder(orderRes);
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testGetOrderItems_ReturnsBadRequest() {
+		
+		int orderId = 1;
+		Order order = new Order();
+		order.setOrderId(orderId);
+		
+		when(orderService.getOrderItemsByOrder(order)).thenReturn(null);
+		
+		ResponseEntity<?> res = orderController.getOrders(order);
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testGetOrderItems_ReturnsOk() {
+		
+		int orderId = 1;
+		Order order = new Order();
+		order.setOrderId(orderId);
+
+		OrderItem orderItem1 = new OrderItem();
+		orderItem1.setProduct(product);
+		
+		OrderItem orderItem2 = new OrderItem();
+		orderItem2.setProduct(product2);
+		
+		List<OrderItem> orderItems = Arrays.asList(orderItem1, orderItem2);
+		
+		when(orderService.getOrderItemsByOrder(order)).thenReturn(orderItems);
+		ResponseEntity<?> res = orderController.getOrders(order);
+		assertEquals(HttpStatus.OK, res.getStatusCode());
+	}
+	
+	@Test
+	public void testGetOrderHistoryBySeller_ReturnsOk() {
+		Order order1 = new Order();
+		Order order2 = new Order();
+		
+		int orderId1 = 1;
+		int orderId2 = 2;
+		
+		order1.setOrderId(orderId1);
+		order2.setOrderId(orderId2);
+		
+		List<Order> orders = Arrays.asList(order1, order2);
+		when(orderService.getOrdersForSeller()).thenReturn(orders);
+		ResponseEntity<?> res = orderController.orderHistoryBySeller();
+		assertEquals(HttpStatus.OK, res.getStatusCode());
+	}
+	
+	@Test
+	public void testGetOrderHistoryBySeller_ReturnsBadRequest() {
+		
+		when(orderService.getOrdersForSeller()).thenReturn(null);
+		ResponseEntity<?> res = orderController.orderHistoryBySeller();
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderDetails_OrderNotFound() {
+		
+		int orderId = 1;
+		when(orderService.getOrderById(orderId)).thenReturn(null);
+		ResponseEntity<?> res = orderController.orderDetails(orderId);
+		assertEquals(HttpStatus.NOT_FOUND, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderDetails_OrderItemsNotFound_ReturnsBadRequest() {
+		
+		int orderId = 1;
+		Order order = new Order();
+		order.setOrderId(orderId);
+		
+		when(orderService.getOrderById(orderId)).thenReturn(order);
+		when(orderService.getOrderItemsByOrder(order)).thenReturn(null);
+		ResponseEntity<?> res = orderController.orderDetails(orderId);
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderDetails_ReturnsOk() {
+		int orderId = 1;
+		Order order = new Order();
+		order.setOrderId(orderId);
+		
+		OrderItem orderItem1 = new OrderItem();
+		orderItem1.setProduct(product);
+		
+		OrderItem orderItem2 = new OrderItem();
+		orderItem2.setProduct(product2);
+		
+		List<OrderItem> orderItems = Arrays.asList(orderItem1, orderItem2);
+		
+		when(orderService.getOrderById(orderId)).thenReturn(order);
+		when(orderService.getOrderItemsByOrder(order)).thenReturn(orderItems);
+		ResponseEntity<?> res = orderController.orderDetails(orderId);
+		assertEquals(HttpStatus.OK, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderDetails_OrderIdNotFound() {
+		Integer orderId = null;
+		
+		Order order = new Order();
+		order.setOrderId(orderId);
+		
+		ResponseEntity<?> res = orderController.orderDetails(orderId);
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderHistory_UserIdNotFound() {
+		Integer userId = null;
+		
+		ResponseEntity<?> res = orderController.orderHistory(userId);
+		assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderHistory_UserIdFound_UserNotFound() {
+		Integer userId = 1;
+		
+		when(userRepository.findByUserId(userId)).thenReturn(null);
+		ResponseEntity<?> res = orderController.orderHistory(userId);
+		assertEquals(HttpStatus.NOT_FOUND, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderHistory_OrderNotFound() {
+		Integer userId = 1;
+		
+		when(userRepository.findByUserId(userId)).thenReturn(userModel);
+		when(orderService.getOrdersByUser(userModel)).thenReturn(null);
+		ResponseEntity<?> res = orderController.orderHistory(userId);
+		assertEquals(HttpStatus.NOT_FOUND, res.getStatusCode());
+	}
+	
+	@Test
+	public void testOrderHistory_OrderFound() {
+		Integer userId = 1;
+		when(userRepository.findByUserId(userId)).thenReturn(userModel);
+		
+		Order order1 = new Order();
+		Order order2 = new Order();
+		
+		int orderId1 = 1;
+		int orderId2 = 2;
+		
+		order1.setOrderId(orderId1);
+		order2.setOrderId(orderId2);
+		
+		ResponseEntity<?> res = orderController.orderHistory(userId);
+		assertEquals(HttpStatus.OK, res.getStatusCode());
+	}
+}

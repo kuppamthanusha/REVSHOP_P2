@@ -1,0 +1,14 @@
+package com.revshop.userservice.configs;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.core.ProducerFactory;
+
+@Configuration
+public class KafkaProducer {
+
+	@Bean
+	public ProducerFactory<String, String> producerFactory() {
+		
+	}
+}

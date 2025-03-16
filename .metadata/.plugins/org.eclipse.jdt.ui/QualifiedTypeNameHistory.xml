@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.revshop.cartservice.entity.UserModel"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="com.revshop.cartservice.entity.Product"/>
+    <fullyQualifiedTypeName name="org.mockito.MockitoAnnotations"/>
+    <fullyQualifiedTypeName name="org.assertj.core.util.Arrays"/>
+    <fullyQualifiedTypeName name="com.revshop.order_service.repository.OrderRepository"/>
+    <fullyQualifiedTypeName name="com.revshop.order_service.repository.UserRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.kafka.config.TopicBuilder"/>
+    <fullyQualifiedTypeName name="org.springframework.messaging.support.MessageBuilder"/>
+    <fullyQualifiedTypeName name="org.springframework.kafka.support.KafkaHeaders"/>
+    <fullyQualifiedTypeName name="org.springframework.kafka.support.serializer.JsonDeserializer"/>
+</qualifiedTypeNameHistroy>

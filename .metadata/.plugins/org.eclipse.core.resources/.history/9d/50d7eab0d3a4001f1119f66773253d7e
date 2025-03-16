@@ -1,0 +1,7 @@
+package com.example.client_app.service;
+
+@Service
+public class MessageConsumer {
+
+	@KafkaListener(topics="kafka", group-id="group-1")
+}

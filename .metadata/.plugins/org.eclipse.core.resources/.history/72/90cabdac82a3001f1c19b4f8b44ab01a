@@ -1,0 +1,10 @@
+package com.revshop.userservice.configs;
+
+@Configuration
+public class KafkaProducer {
+
+	@Bean
+	public ProducerFactory<String, String> producerFactory() {
+		
+	}
+}

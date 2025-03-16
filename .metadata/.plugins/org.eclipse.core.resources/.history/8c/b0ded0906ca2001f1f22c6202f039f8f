@@ -1,0 +1,11 @@
+package com.revshop.userservice.controllertest;
+
+import org.mockito.InjectMocks;
+
+import com.revshop.userservice.controller.UserController;
+
+public class UserControllerTest {
+
+	@InjectMocks
+	private UserController userController;
+}

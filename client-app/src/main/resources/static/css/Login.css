@@ -1,0 +1,137 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.container-fluid {
+    height: 100%;
+    display: flex;
+}
+
+.left-section {
+    background-color: #fff;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.login-form .social-login {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.login-form .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.4);
+}
+
+.btn-signin {
+    background-color: #076c78;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+
+.btn-signin:hover {
+    background-color: #04646f;
+    color: rgba(0,0,0,0.9);
+}
+
+.right-section {
+    background: linear-gradient(135deg, #1d4542, #2a9ee5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.right-section h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.right-section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn-signup {
+    background-color: white;
+    color: #00a58c;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-signup:hover {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .right-section {
+        display: none;
+    }
+
+    .left-section {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+.error {
+	font-size: 12px;
+	margin-top: 5px;
+	color: red;
+	padding-left: 10px;
+}
+
+ .forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #1976d2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #125a8a;
+}

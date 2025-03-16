@@ -1,0 +1,8 @@
+package com.revshop.userservice.service;
+
+@Service
+public class MessageProducer {
+
+	@Autowired
+	private
+}

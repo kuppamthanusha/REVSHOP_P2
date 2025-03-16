@@ -1,0 +1,73 @@
+package com.revshop.cartservice.controller;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.revshop.cartservice.entity.Cart;
+import com.revshop.cartservice.entity.UserModel;
+import com.revshop.cartservice.service.CartService;
+
+public class TestCartController {
+
+	@InjectMocks
+	private CartController cartController;
+	
+	@Mock
+	private CartService cartService;
+	
+	
+	@BeforeEach
+	public void setup() {
+		MockitoAnnotations.openMocks(this);
+	}
+	
+	@Test
+	public void getCartItems_ReturnsBadRequest() {
+		
+		int userId = 1;
+		UserModel userModel = new UserModel();
+		userModel.setUserId(userId);
+		
+		when(cartService.getCartItemsByuserModel(userModel)).thenReturn(null);
+		
+		ResponseEntity<?> response = cartController.showCartPage(userModel);
+		
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+	}
+	
+	@Test
+	public void getCartItems_ReturnsOk() {
+		
+		int userId = 1;
+		UserModel userModel = new UserModel();
+		userModel.setUserId(userId);
+		
+		List<Cart> cartItems = new ArrayList<>();
+		
+		when(cartService.getCartItemsByuserModel(userModel)).thenReturn(cartItems);
+		
+		ResponseEntity<?> response = cartController.showCartPage(userModel);
+		
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+	
+	@Test
+	public void addToCart_ReturnsOk() {
+		Cart cart = new Cart();
+		int userId = 1;
+		UserModel userModel = new UserModel();
+		cart.setUser(userModel);
+	}
+	
+}

@@ -1,0 +1,5 @@
+package com.example.client_app.service;
+
+public class MessageConsumer {
+
+}

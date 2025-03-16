@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #f0f8ff, #e6e6fa);
+    overflow: auto;
+}
+
+.registration-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s forwards;
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.registration-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: #4A90E2;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-left: 8px;
+    color: #4A90E2;
+}
+
+.form-control {
+    border-radius: 1.6rem !important;
+    background-color: rgba(240, 240, 240, 0.9) !important;
+    color: #333 !important;
+}
+
+.btn-custom {
+    display: block;
+    margin: 0 auto;
+    background-color: #4A90E2;
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.3s;
+    padding: 10px 20px;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #357ABD;
+    transform: scale(1.05);
+}
+
+.login-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #555;
+}
+
+a:hover {
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+.error {
+    color: red;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 1.5rem;
+    }
+
+    .registration-container h2 {
+        font-size: 1.5rem;
+    }
+}

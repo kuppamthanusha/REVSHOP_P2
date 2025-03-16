@@ -1,0 +1,10 @@
+package com.example.client_app.service;
+
+@Service
+public class MessageConsumer {
+
+	   @KafkaListener(topics = "my-topic", groupId = "my-group-id")
+	    public void listen(String message) {
+	        System.out.println("Received message: " + message);
+	    }
+}
