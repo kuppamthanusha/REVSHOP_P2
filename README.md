@@ -34,7 +34,6 @@ It simplifies configuration and deployment by:
 
 **API Gateway:**  
 - Acts as a **single entry point** for client requests.  
-- Handles **routing, load balancing, and authentication**.  
 - Redirects the request to the appropriate microservice.  
 
 👉 **Use in Project:**  
@@ -59,8 +58,6 @@ It simplifies configuration and deployment by:
 **✅ MySQL (Database)**  
 **MySQL** is a relational database used to store structured data.  
 - Uses **SQL** (Structured Query Language) for data manipulation.  
-- Ensures **data consistency** and supports **ACID** (Atomicity, Consistency, Isolation, Durability) transactions.  
-- Provides **indexing**, **joins**, and **foreign key constraints**.  
 
 👉 **Use in Project:**  
 - Stores **user data**, **product details**, **cart information**, **order history**, and **payment details**.  
