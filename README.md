@@ -9,9 +9,16 @@ This project is an E-Commerce Platform built using Spring Boot and a Microservic
 
 ## 🚀 Technologies Used**
 
-ava (Spring Boot)
+Java (Spring Boot)
+
+
 Spring Cloud (Eureka, API Gateway)
+
 Hibernate (JPA)
+
 MySQL (Database)
+
 Docker (Containerization)
+
+
 Restful API
