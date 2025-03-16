@@ -47,7 +47,7 @@ It simplifies configuration and deployment by:
 - It maps **Java objects** to **database tables**.  
 - Simplifies **CRUD** (Create, Read, Update, Delete) operations.  
 - Automatically generates **SQL queries** based on Java objects.  
-- Supports **caching** and **lazy loading**.  
+ 
 
 👉 **Use in Project:**  
 - Used to handle **database interactions** for product details, user data, and order management.  
